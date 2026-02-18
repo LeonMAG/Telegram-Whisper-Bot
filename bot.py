@@ -105,12 +105,11 @@ async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         MAX_MSG_LEN = 4000
         if len(text) <= MAX_MSG_LEN:
-            await message.reply_text(f"📝 *Transcripción:*\n\n{text}", parse_mode="Markdown")
+            await message.reply_text(text)
         else:
             parts = [text[i:i + MAX_MSG_LEN] for i in range(0, len(text), MAX_MSG_LEN)]
             for idx, part in enumerate(parts, 1):
-                header = f"📝 *Transcripción (parte {idx}/{len(parts)}):*\n\n"
-                await message.reply_text(f"{header}{part}", parse_mode="Markdown")
+                await message.reply_text(part)
 
         await processing_msg.delete()
 
